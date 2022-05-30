@@ -1,22 +1,17 @@
-Student_info(
+User_info(
 	id(int, NOT NULL, auto_increment, PK),
-	Student_id(int, NOT NULL),
+	userId(VARCHAR(100)),
+	uniqueId(int, NOT NULL), // 학번
 	Name(VARCHAR(100), NOT NULL),
-	Authorized(int, NOT NULL, DEFAULT 0)
-)
-
-lecturer_info(
-	id(int, NOT NULL, auto_increment, PK),
-	lecturer_id(int, NOT NULL),
-	Name(VARCHAR(100), NOT NULL),
-	Authorized(int, NOT NULL, DEFAULT 0)
-)
+	Authorized(smallint, NOT NULL, DEFAULT 0),
+	is_lecturer(smallint, NOT NULL, DEFAULT 0)
+}
 
 Subject_info(
 	id(int, NOT NULL, auto_increment, PK),
-	Subject_id(int, NOT NULL),
-	Subject_name(int, NOT NULL),
-	Lecturer_id(int, NOT NULL, constraint lecturer_info_id_fk, FOREIGN KEY Lecturer_id REFERENCES lecturer_info(lecturer_id)),
+	Subject_id(VARCHAR(100), NOT NULL),
+	Subject_name(VARCHAR(100), NOT NULL),
+	Lecturer_id(int, NOT NULL, constraint user_info_id_fk, FOREIGN KEY uniqueid REFERENCES user_info(uniqueid)),
 	Class_Day_1(smallint, NOT NULL),
 	Class_Starttime_1(TIME, NOT NULL),
 	Class_Endtime_1(TIME, NOT NULL), // 수업요일, 시작시간, 종료시간 (수업별로) 요일은 1이 일요일, 7이 토요일, 0은 NONE.
@@ -33,7 +28,7 @@ Subject_info(
 
 Subject_($Subject_id)_attendance(
 	id(int, NOT NULL, auto_increment, PK),
-	Student_id(int, NOT NULL, constraint student_info_id_fk, FOREIGN KEY Student_id REFERENCES Student_info(Student_id)),
+	Student_id(int, NOT NULL, constraint user_info_id_fk, FOREIGN KEY uniqueid REFERENCES user_info(uniqueid)),
 	Class_1(Smallint, DEFAULT=0), // 차시별 출석정보 0 : 미체크, 1 : 출석, 2 : 공결, 3 : 지각, 4 : 조퇴, 5 : 결석, 6 : 휴강
 	Time_1(DATETIME), // 차시별 출석체크 인증시간  
 	Class_2(Smallint, DEFAULT=0),
