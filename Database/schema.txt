@@ -1,0 +1,38 @@
+User_info(
+	id(int, NOT NULL, auto_increment, PK),
+	userId(VARCHAR(100)),
+	uniqueId(int, NOT NULL), // 학번
+	Name(VARCHAR(100), NOT NULL),
+	Authorized(smallint, NOT NULL, DEFAULT 0),
+	is_lecturer(smallint, NOT NULL, DEFAULT 0)
+}
+
+Subject_info(
+	id(int, NOT NULL, auto_increment, PK),
+	Subject_id(VARCHAR(100), NOT NULL),
+	Subject_name(VARCHAR(100), NOT NULL),
+	Lecturer_id(int, NOT NULL, constraint user_info_id_fk, FOREIGN KEY uniqueid REFERENCES user_info(uniqueid)),
+	Class_Day_1(smallint, NOT NULL),
+	Class_Starttime_1(TIME, NOT NULL),
+	Class_Endtime_1(TIME, NOT NULL), // 수업요일, 시작시간, 종료시간 (수업별로) 요일은 1이 일요일, 7이 토요일, 0은 NONE.
+	Class_Day_2(smallint, DAFAULT = 0),
+	Class_Starttime_2(TIME, DAFAULT = 0),
+	Class_Endtime_2(TIME, DAFAULT = 0),
+	Class_Day_3(smallint, DAFAULT = 0),
+	Class_Starttime_3(TIME, DAFAULT = 0),
+	Class_Endtime_3(TIME, DAFAULT = 0), // 최대 주 3회 수업.
+	Class_lat(Float, NOT NULL);
+	Class_lon(Float, NOT NULL);
+	Announcement(VARCHAR(60000)), // 공지사항들을 {공지1}, {공지2}, 이렇게 연결된 문자열로 저장.
+	Total_lecture(smallint, NOT NULL),
+	Conducted_lecture(smallint, NOT NULL), // 학기 중 전체 강의 개수, 진행된 강의 개수
+)
+
+Subject_($Subject_id)_attendance(
+	id(int, NOT NULL, auto_increment, PK),
+	Student_id(int, NOT NULL, constraint user_info_id_fk, FOREIGN KEY uniqueid REFERENCES user_info(uniqueid)),
+	Class_1(Smallint, DEFAULT=0), // 차시별 출석정보 0 : 미체크, 1 : 출석, 2 : 공결, 3 : 지각, 4 : 조퇴, 5 : 결석, 6 : 휴강
+	Time_1(DATETIME), // 차시별 출석체크 인증시간  
+	Class_2(Smallint, DEFAULT=0),
+	Time_2(DATETIME),
+            .... // 16주차 주 3회 수업을 최대로 하여 총 48개 존재.
