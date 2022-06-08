@@ -85,7 +85,7 @@ exports.check_att_student = function(userId, subj_id, subject_info, subject_atte
                 "template": {
                     "type": "buttons",
                     "title": "출석노트",
-                    "text": "과목을 선택해주시기 바랍니다.",
+                    "text": "귀하의 출석 현황입니다.",
                     "actions": postbacks
                 }
               }
