@@ -31,7 +31,7 @@ GPS 등을 활용한 인증출석, 출석 확인 및 변경, 휴강처리, 공�
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Project Architecture
+## Project Architexture
 ![설계](Pics/%EC%84%A4%EA%B3%84.png)
 
 ### Built With
@@ -53,13 +53,13 @@ GPS 등을 활용한 인증출석, 출석 확인 및 변경, 휴강처리, 공�
 ### Prerequisites
 
 * npm
-  ```sh
+  ```bash
   npm install npm@latest -g
   ```
 node.js가 없다면, 위의 전에 설치해주시기 바랍니다. [관련 Github](https://github.com/nodejs/node#download)
 
 * mysql
-  ```sh
+  ```bash
   sudo yum localinstall https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
   sudo yum install mysql-community-server
   sudo systemctl start mysqld
@@ -68,7 +68,7 @@ node.js가 없다면, 위의 전에 설치해주시기 바랍니다. [관련 Git
 
   이후 다음과 같게 내용 변경.
 
-  ```sh
+  ```bash
   \\\
   character-set-server=utf8mb4
   collation-server=utf8mb4_unicode_ci
@@ -77,7 +77,7 @@ node.js가 없다면, 위의 전에 설치해주시기 바랍니다. [관련 Git
   ```
 
   이후 다음 명령 실행
-  ```sh
+  ```bash
   sudo systemctl restart mysqld
   ```
 
@@ -85,15 +85,15 @@ node.js가 없다면, 위의 전에 설치해주시기 바랍니다. [관련 Git
 
 
 1. Clone the repo
-   ```sh
+   ```bash
    git clone http://khuhub.khu.ac.kr/2019102217/Attendance_management_with_chatbot.git
    ```
 3. Install NPM packages
-   ```sh
+   ```bash
    npm install
    ```
 4. login mysql server
-   ```sh
+   ```bash
    cat /var/log/mysqld.log | grep 'temporary password'
    => this will be temporary password.
    mysql -u root -p
