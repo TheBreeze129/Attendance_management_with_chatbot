@@ -108,6 +108,8 @@ node.js가 없다면, 위의 전에 설치해주시기 바랍니다. [관련 Git
 
 6. Write your Mysql account and database name in env/.env
 
+7. Write your Line Token and domain in env/.env
+
 7. Run with app.js!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
