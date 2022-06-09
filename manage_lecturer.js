@@ -13,30 +13,32 @@ exports.select_when = function (userId, subj_id, subject_info, res_waiting) {
         }
         postbacks.push(pst)
     }
-    request.post(
-        {
+    for(var i =0;i<=parseInt(postbacks.length/4);i++) {
+        request.post(
+          {
             url: process.env.TARGET_URL_PUSH,
             headers: {
-                'Authorization': `Bearer ${process.env.TOKEN}`
+              'Authorization': `Bearer ${process.env.TOKEN}`
             },
             json: {
-                "to": `${userId}`,
-                "messages":[
-                    {
-                        "type": "template",
-                        "altText": "This is a buttons template",
-                        "template": {
-                            "type": "buttons",
-                            "title": "출석 확인",
-                            "text": "원하는 차시를 골라주십시오",
-                            "actions": postbacks
-                        }
+              "to": `${userId}`,
+              "messages":[
+                  {
+                    "type": "template",
+                    "altText": "This is a buttons template",
+                    "template": {
+                        "type": "buttons",
+                        "title": "출석노트",
+                        "text": "차시를 골라주시기 바랍니다.",
+                        "actions": postbacks.slice(i*4,i*4+4)
                     }
+                  }
                 ]
-            }
-        },(error, response, body) => {
-            console.log(body)
-        });
+             }
+            },(error, response, body) => {
+                console.log(body)
+          });
+      }
     res_waiting[userId][0] = 6;
 }
 
@@ -68,30 +70,32 @@ exports.check_att_lecturer = function (userId, subj_id, subject_info, subject_at
         }
         postbacks.push(pst)
     }
-    request.post(
-        {
+    for(var i =0;i<=parseInt(postbacks.length/4);i++) {
+        request.post(
+          {
             url: process.env.TARGET_URL_PUSH,
             headers: {
-                'Authorization': `Bearer ${process.env.TOKEN}`
+              'Authorization': `Bearer ${process.env.TOKEN}`
             },
             json: {
-                "to": `${userId}`,
-                "messages":[
-                    {
-                        "type": "template",
-                        "altText": "This is a buttons template",
-                        "template": {
-                            "type": "buttons",
-                            "title": "출석 확인",
-                            "text": "해당 차시의 지각자 명단입니다.",
-                            "actions": postbacks
-                        }
+              "to": `${userId}`,
+              "messages":[
+                  {
+                    "type": "template",
+                    "altText": "This is a buttons template",
+                    "template": {
+                        "type": "buttons",
+                        "title": "출석노트",
+                        "text": "해당 수업에 대한 지각자 명단입니다.",
+                        "actions": postbacks.slice(i*4,i*4+4)
                     }
+                  }
                 ]
-            }
-        },(error, response, body) => {
-            console.log(body)
-        });
+             }
+            },(error, response, body) => {
+                console.log(body)
+          });
+      }
 
         var postbacks2 = [];
         for(var i in absent_list) {
@@ -103,30 +107,32 @@ exports.check_att_lecturer = function (userId, subj_id, subject_info, subject_at
             }
             postbacks2.push(pst)
         }
-        request.post(
-            {
+        for(var i =0;i<=parseInt(postbacks2.length/4);i++) {
+            request.post(
+              {
                 url: process.env.TARGET_URL_PUSH,
                 headers: {
-                    'Authorization': `Bearer ${process.env.TOKEN}`
+                  'Authorization': `Bearer ${process.env.TOKEN}`
                 },
                 json: {
-                    "to": `${userId}`,
-                    "messages":[
-                        {
-                            "type": "template",
-                            "altText": "This is a buttons template",
-                            "template": {
-                                "type": "buttons",
-                                "title": "출석 확인",
-                                "text": "해당 차시의 결석자 명단입니다.",
-                                "actions": postbacks2
-                            }
+                  "to": `${userId}`,
+                  "messages":[
+                      {
+                        "type": "template",
+                        "altText": "This is a buttons template",
+                        "template": {
+                            "type": "buttons",
+                            "title": "출석노트",
+                            "text": "해당 수업에 대한 결석자 명단입니다..",
+                            "actions": postbacks2.slice(i*4,i*4+4)
                         }
+                      }
                     ]
-                }
-            },(error, response, body) => {
-                console.log(body)
-            });
+                 }
+                },(error, response, body) => {
+                    console.log(body)
+              });
+          }
 }
 
 exports.change_att = function (userId, user_info, select, subject_attendance, lec_num, res_waiting) {

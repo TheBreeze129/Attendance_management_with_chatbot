@@ -70,30 +70,36 @@ exports.check_att_student = function(userId, subj_id, subject_info, subject_atte
       }
       postbacks.push(pb);
     }
-    request.post(
-      {
-        url: process.env.TARGET_URL_PUSH,
-        headers: {
-          'Authorization': `Bearer ${process.env.TOKEN}`
-        },
-        json: {
-          "to": `${userId}`,
-          "messages":[
-              {
-                "type": "template",
-                "altText": "This is a buttons template",
-                "template": {
-                    "type": "buttons",
-                    "title": "출석노트",
-                    "text": "귀하의 출석 현황입니다.",
-                    "actions": postbacks
+    for(var i =0;i<=parseInt(postbacks.length/4);i++) {
+      console.log(postbacks.slice(i*4,i*4+4))
+      request.post(
+        {
+          url: process.env.TARGET_URL_PUSH,
+          headers: {
+            'Authorization': `Bearer ${process.env.TOKEN}`
+          },
+          json: {
+            "to": `${userId}`,
+            "messages":[
+                {
+                  "type": "template",
+                  "altText": "This is a buttons template",
+                  "template": {
+                      "type": "buttons",
+                      "title": "출석노트",
+                      "text": "해당 수업에 대한 출석 내용입니다.",
+                      "actions": postbacks.slice(i*4,i*4+4)
+                  }
                 }
-              }
-            ]
-         }
-        },(error, response, body) => {
-            console.log(body)
-      });
+              ]
+           }
+          },(error, response, body) => {
+              console.log(body)
+        });
+    }
+
+    
+    
   }
     
 }
