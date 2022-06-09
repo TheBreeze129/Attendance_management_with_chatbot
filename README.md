@@ -31,8 +31,9 @@ GPS 등을 활용한 인증출석, 출석 확인 및 변경, 휴강처리, 공�
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Project Architexture
+## Project Architecture
 ![설계](Pics/%EC%84%A4%EA%B3%84.png)
+<br><br>Node.js를 활용한 서버와 DBMS는 Amazon EC2 상에서 가동됩니다.
 
 ### Built With
 
